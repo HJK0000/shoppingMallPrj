@@ -1,0 +1,100 @@
+package com.green.shoppingMall.controller;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.shoppingMall.entity.Product;
+import com.green.shoppingMall.entity.User;
+import com.green.shoppingMall.repository.ProductRepository;
+import com.green.shoppingMall.repository.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
+
+@Controller
+@RequestMapping("/member")
+public class MemberController {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
+
+	public void test() {
+		System.out.println(userRepository.getClass().getName());
+
+	}
+
+	@RequestMapping("/registForm")
+	public String registForm() {
+
+		return "member/registForm";
+	}
+
+	@RequestMapping("/regist")
+	public String regist(Model model, HttpServletRequest request) {
+
+		String username = request.getParameter("username");
+		String password1 = request.getParameter("password1");
+		String password2 = request.getParameter("password2");
+		String name = request.getParameter("name");
+		String tel = request.getParameter("tel");
+		String addr = request.getParameter("addr");
+		String role = request.getParameter("role");
+		// LocalDate now = LocalDate.now();
+
+		User user = User.builder().username(username).password1(password1).password2(password2).name(name).tel(tel)
+				.addr(addr).created_at(LocalDateTime.now()).role("ROLE_MEMBER").build();
+
+		userRepository.save(user);
+
+		return "member/loginForm";
+
+	}
+
+	@RequestMapping("/loginForm")
+	public String loginForm() {
+
+		return "member/loginForm";
+	}
+
+	@RequestMapping("/login")
+	public String login(Model model, HttpServletRequest request) {
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		User userResult = userRepository.findByUsernameAndPassword1(username, password);
+
+		String role = userResult.getRole();
+		
+		if(role.equals('ROLE_MEMBER')) {
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("id", username);
+			session.setAttribute("role", role);
+			
+		}
+
+
+
+		return "redirect:/";
+	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+
+		session.getAttribute("id");
+		System.out.println("로그아웃 됨");
+		return "redirect:/";
+	}
+
+}

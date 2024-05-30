@@ -1,0 +1,39 @@
+package com.green.security.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.security.config.CustomUserDetails;
+import com.green.security.entity.Member;
+import com.green.security.repository.MemberRepository;
+
+@Controller
+@RequestMapping("/members")
+public class MemberController {
+
+	@Autowired
+	private MemberRepository memberRepository;
+
+	@RequestMapping("/")
+	public String welcome(Model model) {
+
+		System.out.println("member welcome......");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal(); // 권한이 있는 사용자 정보를 가지고 있는객체에 principal로
+																				// 정보를 가지고 온다.(object타입) -> 형변환 해준다.
+
+		//Member member = memberRepository.findByUsername(userDetails.getUsername());
+		//member.getName();
+
+		model.addAttribute("username", userDetails.getUsername());
+		model.addAttribute("name", userDetails.getName());
+		
+		return "members/welcome";
+	}
+
+}

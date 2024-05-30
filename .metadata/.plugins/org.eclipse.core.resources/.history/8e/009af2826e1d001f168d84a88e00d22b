@@ -1,0 +1,10 @@
+package com.green.shoppingMall.entity;
+
+import lombok.Data;
+
+@Data
+public class ProductDto {
+	
+	private Long pnum;
+	private 
+}

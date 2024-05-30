@@ -1,0 +1,13 @@
+package com.green.shoppingMall.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.green.shoppingMall.entity.User;
+
+public interface UserRepository extends JpaRepository<User, String> {
+	
+	//쿼리 매서드
+	
+	
+
+}

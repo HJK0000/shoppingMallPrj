@@ -1,0 +1,21 @@
+package com.green.shoppingMall.repository;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class UserRepositoryTests {
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@Test
+	public void insert() {
+		
+		
+		
+		
+	}
+	
+}

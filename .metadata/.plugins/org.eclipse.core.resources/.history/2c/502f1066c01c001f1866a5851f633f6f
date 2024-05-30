@@ -1,0 +1,8 @@
+package com.green.shoppingMall.repository;
+
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class ReviewRepositoryTests {
+
+}

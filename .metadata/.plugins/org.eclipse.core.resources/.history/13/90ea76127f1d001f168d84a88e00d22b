@@ -1,0 +1,15 @@
+package com.green.shoppingMall.dto;
+
+import lombok.Data;
+
+@Data
+public class ProductDto {
+	
+	private Long pnum;
+	private String pcategory;
+	private String pdelievery;
+	private String poriginName;
+	private String pnewName;
+	private String pthumbnailName;
+	
+}

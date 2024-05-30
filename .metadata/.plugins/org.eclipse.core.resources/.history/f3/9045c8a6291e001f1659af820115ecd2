@@ -1,0 +1,16 @@
+package com.green.security.entity;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class Member {
+
+	private Integer mno;
+	private String username;
+	private String password;
+	private String name;
+	private String role;
+	
+}

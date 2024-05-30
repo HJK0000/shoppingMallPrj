@@ -1,0 +1,31 @@
+package com.green.security.controller;
+
+import java.security.Principal;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.security.config.CustomUserDetails;
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+	@RequestMapping("/")
+	public String welcome(Model model, Principal principal) {
+
+		System.out.println("admin welcome......");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//UserDetails userDetails = (UserDetails) authentication.getPrincipal(); 스프링 프레임워크 안에 있는 UserDetails
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				
+		model.addAttribute("username", userDetails.getUsername());
+		model.addAttribute("name", userDetails.getName()); // UserDetails는 id,pw밖에 못 가지고 오는데 우리가 만든 CustomUserDetails 구현체로 형변환해서 받아오면 member의 name도 가지고 올 수 잇다.
+		
+		return "admin/welcome";
+	}
+}

@@ -1,0 +1,22 @@
+package com.green.shoppingMall.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.green.shoppingMall.entity.User;
+
+public interface UserRepository extends JpaRepository<User, String> {
+	
+	//쿼리 매서드
+	
+	//이름으로 조회하기
+	User findByusername(String username);
+	
+	//이름으로 조회하기
+	List<User> findByName(String name);
+	
+	//role로 조회하기
+	List<User> findByRole(String role);
+	
+}

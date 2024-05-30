@@ -1,0 +1,10 @@
+package com.green.security.dto;
+
+public class MemberDto {
+
+	private Integer mno;
+	private String username;
+	private String password;
+	private String name;
+	private String role;
+}

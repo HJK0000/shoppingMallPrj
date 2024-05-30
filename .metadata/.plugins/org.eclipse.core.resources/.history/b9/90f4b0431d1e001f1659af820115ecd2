@@ -1,0 +1,29 @@
+package com.green.shoppingMall.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.green.shoppingMall.entity.User;
+
+public interface UserRepository extends JpaRepository<User, String> {
+	
+	//쿼리 매서드
+	
+	//이름으로 조회하기
+	Optional<User> findByusername(String username);
+	
+	//이름으로 조회하기
+	List<User> findByName(String name);
+	
+	//role로 조회하기
+	List<User> findByRole(String role);
+	
+	// 로그인 
+	@Query(value = "select * from user where username = ?, password1 = ?", nativeQuery = true)
+	User findByUsernameAndPassword1(String username, String password1);
+
+
+}

@@ -1,0 +1,45 @@
+package com.green.security.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration // 설정하는 class에요! 라는 의미로 이 어노테이션 붙여준다.
+@EnableWebSecurity // spring security 처리용 어노테이션
+public class SecurityConfig {
+	// 반환타입을 BCryptPasswordEncoder 로 설정 (패스워드 암호화하고 반환하는거 받는 타입)
+
+	@Bean // 매서드에서 반환하는 것을 빈으로 등록할때 쓰는 어노테이션 @Bean --> 필요할때 autowired해서 꺼내쓰면됨
+	public BCryptPasswordEncoder bcCryptPasswordEncoder() {
+
+		return new BCryptPasswordEncoder();
+
+	}
+
+	@Bean // 인가를 위한 객체
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		http.authorizeHttpRequests((auth) -> auth.requestMatchers("/", "/registForm", "/registProc").permitAll()
+				.requestMatchers("/members/**").hasAnyRole("ADMIN", "MEMBER")
+				.requestMatchers("/admin/**").hasRole("ADMIN") // 1개만 쓸때는 hasRole
+				.anyRequest().authenticated() // 그 외에 나머지 request들(anyRequest)은 인증을 거쳐야 한다.
+
+		); // 자바에서는 인터페이스를 통해 람다를 구현.. 함수형 프로그래밍..
+
+		http.formLogin((auth) -> auth // 로그인
+				.loginPage("/login") // 로그인이라는 요청이 오면 내가만든 login페이지로 가게하겠다.
+				.loginProcessingUrl("/loginProc") // 애는 Controller에 안만들어도 된다. security가 대신 해준다!!!! registProc은 내가 만들었는데....
+				.permitAll() // 모두 허용
+
+		);
+		
+		http:csrf(AbstractHttpConfigurer::disable); // csrf 기능 그기
+
+		return http.build();
+	}
+
+}

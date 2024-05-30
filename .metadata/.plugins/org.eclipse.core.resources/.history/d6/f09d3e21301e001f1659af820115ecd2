@@ -1,0 +1,21 @@
+package com.green.security.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+@Configuration // 설정하는 class에요! 라는 의미로 이 어노테이션 붙여준다.
+@EnableWebSecurity // spring security 처리용 어노테이션
+public class SecurityConfig {
+	// 반환타입을 BCryptPasswordEncoder 로 설정 (패스워드 암호화하고 반환하는거 받는 타입)
+
+	@Bean 	// 매서드에서 반환하는 것을 빈으로 등록할때 쓰는 어노테이션 @Bean --> 필요할때 autowired해서 꺼내쓰면됨
+	public BCryptPasswordEncoder bcCryptPasswordEncoder() {
+
+		return new BCryptPasswordEncoder();
+
+	}
+	
+
+}

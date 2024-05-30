@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Members Welcome</h1>
+	<hr>
+	<h1></h1>
+	<p>[[${username}]]</p>
+
+</body>
+</html>

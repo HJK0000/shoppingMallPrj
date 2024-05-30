@@ -1,0 +1,5 @@
+package com.green.shoppingMall.config;
+
+public class WebMvcConfig {
+
+}

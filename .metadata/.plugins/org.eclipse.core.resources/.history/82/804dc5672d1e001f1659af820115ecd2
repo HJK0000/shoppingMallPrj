@@ -1,0 +1,13 @@
+package com.green.security.dto;
+
+import jakarta.persistence.Column;
+
+public class MemberDto {
+
+	private Integer mno;
+	@Column(unique = true)
+	private String username;
+	private String password;
+	private String name;
+	private String role;
+}

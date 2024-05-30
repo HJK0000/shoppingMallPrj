@@ -1,0 +1,9 @@
+package com.green.security.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.green.security.entity.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Integer>{
+
+}

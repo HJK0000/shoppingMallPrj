@@ -1,0 +1,11 @@
+INDEX VERSION 1.134
+C:\Users\GG\Desktop\shoppingMall\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\131960282.index
+\shoppingMall\src\main\java
+C:\dev2\shoppingMall\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2194678955.index
+\shoppingMall\src\main\java
+C:\dev2\shoppingMall\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2936784443.index
+\shoppingMall\src\main\java
+C:\Users\GG\Desktop\shoppingMall\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2194678955.index
+\shoppingMall\src\main\java
+C:\Users\GG\Desktop\shoppingMall\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2936784443.index
+\shoppingMall\src\main\java

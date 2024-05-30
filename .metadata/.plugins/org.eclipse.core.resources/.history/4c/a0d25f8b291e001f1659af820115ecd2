@@ -1,0 +1,5 @@
+package com.green.security.entity;
+
+public class Member {
+
+}

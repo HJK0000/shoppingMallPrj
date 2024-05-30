@@ -1,0 +1,24 @@
+package com.green.shoppingMall.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+public class MyController {
+	
+<!--	@RequestMapping("/")
+	public void whatisthis(Model model) {
+		
+		log.info("whatisthis....");
+		//String imagePath = "/images/"
+		
+	}
+
+	-->
+	
+	
+}

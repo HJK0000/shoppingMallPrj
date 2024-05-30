@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Members Welcome</h1>
+	<hr>
+	<h2>Security Context로부터 얻어낸 UserDetails 객체(사용자정보 객체(Member))를 품은
+		객체)를 Model로 받아 보기</h2>
+	<p>[[${username}]]</p>
+	<p>[[${name}]]</p>
+</body>
+</html>

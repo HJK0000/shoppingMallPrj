@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>헤더</title>
+<style>
+</style>
+</head>
+<body>
+	<header>
+		<h1>헤더</h1>
+		<c:if test="${sessionScope.id == null }">
+			<button>
+				<a href="/member/registForm">회원가입</a>
+			</button>
+			<button>
+				<a href="/member/loginForm">로그인</a>
+			</button>
+		</c:if>
+		<c:if test="${sessionScope.id != null }">
+			<a href="#">내 주문목록</a>
+			<a herf="#">장바구니 가기</a>
+			<button>
+				<a href="/logout">로그아웃</a>
+			</button>
+
+			<a href="#"></a>
+			<button>
+				<a href="/admin/productRegistForm">상품 등록</a>
+			</button>
+			<button>
+				<a href="/logout">로그아웃</a>
+			</button>
+			<hr>
+	</header>
+</body>
+</html>

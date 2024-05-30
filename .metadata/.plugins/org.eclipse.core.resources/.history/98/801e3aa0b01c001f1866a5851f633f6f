@@ -1,0 +1,48 @@
+package com.green.shoppingMall.entity;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.ColumnDefault;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Table(name = "product")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Product {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long pnum;
+	private String pname;
+	private Long pprice;
+	private String pinfo;
+	private String pimg;
+	private String pstate;
+	private String preview;
+	private Long psoldcount;
+	
+	@Column(name = "pregdate")
+	@ColumnDefault("now()") //default = now()
+	private LocalDateTime pregdate;
+	private String pcategory;
+	private String pdelievery;
+	private Long punitprice;
+	
+	
+	
+	
+
+}

@@ -1,0 +1,71 @@
+package com.green.shoppingMall.entity;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.ColumnDefault;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Table(name = "user")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class User {
+
+	@Id
+	//@Column(name = "username", length = 50, nullable = false)
+	private String username;
+	
+	@Column(name = "password1", length = 50, nullable = false )
+	@NotNull
+	private String password1;
+	
+	@Column(name = "password2", length = 50, nullable = false)
+	@NotNull
+	private String password2;
+	
+	@Column(name = "name", length = 30, nullable = false)
+	@NotNull
+	private String name;
+	
+	@Column(name = "tel", length = 13, nullable = false)
+	@NotNull
+	private String tel;
+	
+	@Column(name = "addr", length = 100, nullable = false)
+	@NotNull
+	private String addr;
+	
+	@Column(name = "created_at", updatable = false, nullable = false)
+	@ColumnDefault("now()") //default = now()
+	@NotNull
+	private LocalDateTime created_at;
+
+	@Column(name = "role")
+	@NotNull
+	private String role;
+	
+	@PrePersist
+	protected void onCreate() {
+		
+		if(created_at == null) {
+			
+			created_at = LocalDateTime.now();
+			
+		}
+		
+		
+	}
+	
+}

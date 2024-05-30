@@ -1,0 +1,23 @@
+package com.green.shoppingMall.entity;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Entity
+@Data
+@Table(name = "review")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Review {
+
+	
+	@Column(name = "preview", length=100, nullable=true)
+	private String preview;
+}

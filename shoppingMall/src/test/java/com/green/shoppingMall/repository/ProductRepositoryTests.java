@@ -1,0 +1,46 @@
+package com.green.shoppingMall.repository;
+
+import java.time.LocalDateTime;
+import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.green.shoppingMall.entity.Product;
+
+@SpringBootTest
+@Transactional
+public class ProductRepositoryTests {
+
+	@Autowired
+	ProductRepository productRepository;
+
+	@Test
+	public void 상품등록() {
+
+		IntStream.rangeClosed(1, 5).forEach(i -> {
+
+			Product product = Product.builder().pcategory("커피").pdelievery("무료배송").pinfo("상품 소개 내용").pname("드립커피" + i)
+					.pprice(5000L).pregdate(LocalDateTime.now()).psoldcount(10L).pstate("판매").build();
+
+			Product product2 = Product.builder().pcategory("커피").pdelievery("무료배송").pinfo("상품 소개 내용").pname("콜드브루" + i)
+					.pprice(6000L).pregdate(LocalDateTime.now()).psoldcount(5L).pstate("판매").build();
+
+			productRepository.save(product);
+			productRepository.save(product2);
+
+		});
+
+	}
+
+	
+	@Test
+	public void 특정상품조회() {
+		
+		
+		
+		
+	}
+}

@@ -1,0 +1,21 @@
+package com.green.shoppingMall.repository;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class ProductRepositoryTests {
+
+	@Autowired
+	ProductRepository productRepository;
+
+	@Test
+	public void 상품등록() {
+		
+		
+		
+	}
+	
+	
+}

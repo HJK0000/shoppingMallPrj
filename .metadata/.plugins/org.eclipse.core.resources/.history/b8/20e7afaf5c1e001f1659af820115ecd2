@@ -1,0 +1,57 @@
+package com.green.shoppingMall.controller;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.shoppingMall.entity.Product;
+import com.green.shoppingMall.repository.ProductRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+public class MyController {
+
+	
+	@Autowired
+	private ProductRepository productRepository;
+	
+	@RequestMapping("/")
+	public String root(Model model) {
+
+		List<Product> result = productRepository.findAll();
+
+		Collections.sort(result, new Comparator<Product>() {
+			@Override
+			public int compare(Product p1, Product p2) {
+				return Long.compare(p2.getPsoldcount(), p1.getPsoldcount());
+
+			}
+
+		});
+
+		List<Product> result2 = productRepository.findAll();
+
+		Collections.sort(result2, new Comparator<Product>() {
+			@Override
+			public int compare(Product p1, Product p2) {
+				return p2.getPregdate().compareTo(p1.getPregdate());
+
+			}
+
+		});
+
+		model.addAttribute("soldCountList", result);
+		model.addAttribute("recentUpdateList", result2);
+
+		return "index";
+
+	}
+
+}

@@ -1,0 +1,111 @@
+package com.green.shoppingMall.controller;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.shoppingMall.entity.Basket;
+import com.green.shoppingMall.entity.Product;
+import com.green.shoppingMall.entity.User;
+import com.green.shoppingMall.repository.BasketRepositoty;
+import com.green.shoppingMall.repository.ProductRepository;
+import com.green.shoppingMall.repository.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class ProductController {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
+
+	@Autowired
+	private BasketRepositoty basketRepository;
+
+	public void test() {
+		System.out.println(userRepository.getClass().getName());
+
+	}
+
+	@RequestMapping("/")
+	public String root(Model model) {
+
+		List<Product> result = productRepository.findAll();
+
+		Collections.sort(result, new Comparator<Product>() {
+			@Override
+			public int compare(Product p1, Product p2) {
+				return Long.compare(p2.getPsoldcount(), p1.getPsoldcount());
+
+			}
+
+		});
+
+		List<Product> result2 = productRepository.findAll();
+
+		Collections.sort(result2, new Comparator<Product>() {
+			@Override
+			public int compare(Product p1, Product p2) {
+				return p2.getPregdate().compareTo(p1.getPregdate());
+
+			}
+
+		});
+
+		model.addAttribute("soldCountList", result);
+		model.addAttribute("recentUpdateList", result2);
+
+		return "index";
+
+	}
+
+	@RequestMapping("/productDetail")
+	public String productDetail(Model model, HttpServletRequest request) {
+
+		String spnum = request.getParameter("pnum");
+		Long pnum = Long.parseLong(spnum);
+		Product product = productRepository.findById(pnum).orElse(null);
+
+		model.addAttribute("product", product);
+
+		return "member/productDetail";
+
+	}
+
+	@RequestMapping("/toMyBasket")
+	public String toMyBastket(HttpServletRequest request, Model model, HttpSession session) {
+
+		Long pnum = Long.parseLong(request.getParameter("pnum"));
+		Product product = productRepository.findById(pnum).orElse(null);
+
+		product.getPname();
+		product.getPprice();
+		
+		
+		
+		Basket basket = new Basket(null, product, 1L, product.getPprice());
+
+		basketRepository.save(basket);
+
+		return "";
+	}
+
+	@RequestMapping("/productRegistForm")
+	public String productRegistForm() {
+
+		return "/productRegistForm";
+
+	}
+}

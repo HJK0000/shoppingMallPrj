@@ -1,0 +1,28 @@
+package com.green.security.controller;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+
+@Controller
+@RequestMapping("/members")
+public class MemberController {
+
+	@RequestMapping("/")
+	public String welcome(Model model) {
+
+		System.out.println("member welcome......");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails  userDetails = (UserDetails) authentication.getPrincipal(); // 권한이 있는 사용자 정보를 가지고 있는객체에 principal로 정보를 가지고 온다.(object타입) -> 형변환 해준다.
+
+		model.addAttribute("username", userDetails.getUsername());
+		
+		return "welcome";
+	}
+
+}
